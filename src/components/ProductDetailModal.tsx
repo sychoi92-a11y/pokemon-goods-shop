@@ -63,6 +63,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               src={product.image_url}
               alt={product.name}
               className="w-full max-h-72 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-300"
+              onError={(e) => {
+                const target = e.currentTarget
+                target.onerror = null
+                target.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png'
+              }}
             />
             <div className="mt-4 flex items-center gap-2">
               <span

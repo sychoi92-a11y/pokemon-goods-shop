@@ -70,6 +70,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           alt={product.name}
           className="w-full h-full object-contain group-hover:scale-108 transition-transform duration-300 drop-shadow-md"
           loading="lazy"
+          onError={(e) => {
+            const target = e.currentTarget
+            target.onerror = null
+            target.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png'
+          }}
         />
 
         {/* Quick View Hover Overlay */}
