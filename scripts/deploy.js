@@ -1,9 +1,18 @@
 import { execSync } from 'child_process'
-import { rmSync, existsSync } from 'fs'
+import { rmSync, existsSync, writeFileSync, copyFileSync } from 'fs'
 import { join } from 'path'
 
-console.log('📦 Building project...')
+console.log('📦 Building project with base: /pokemon-goods-shop/ ...')
 execSync('npm run build', { stdio: 'inherit' })
+
+// Create .nojekyll to disable Jekyll on GitHub Pages
+writeFileSync(join(process.cwd(), 'dist', '.nojekyll'), '')
+
+// Copy index.html to 404.html for SPA fallback
+copyFileSync(
+  join(process.cwd(), 'dist', 'index.html'),
+  join(process.cwd(), 'dist', '404.html')
+)
 
 const gitDir = join(process.cwd(), 'dist', '.git')
 if (existsSync(gitDir)) {
